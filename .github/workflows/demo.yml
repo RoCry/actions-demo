@@ -9,11 +9,17 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  Explore-GitHub-Actions:
+  python-actions:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
         uses: actions/setup-python@v3
       - run: python main.py
+      - name: Commit something
+      run: |
+       git config --global user.name 'Action Bot'
+       git config --global user.email 'crysheen+bot@gmail.com'
+       git commit -am "Test something"
+       git push
 
