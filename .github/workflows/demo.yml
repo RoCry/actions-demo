@@ -41,9 +41,9 @@ jobs:
       - uses: lowlighter/metrics@latest
         with:
           # Your GitHub token
-          token: ${{ secrets.METRICS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           # GITHUB_TOKEN is a special auto-generated token restricted to current repository, which is used to push files in it
           # committer_token: ${{ secrets.GITHUB_TOKEN }}
-          committer_token: ${{ github.token }}
+          # committer_token: ${{ github.token }}
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
