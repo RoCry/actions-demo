@@ -1,1 +1,1 @@
-![Metrics](https://github.com/RoCry/actions-demo/blob/master/github-metrics.svg)
+Just for test.
