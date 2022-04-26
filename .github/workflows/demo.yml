@@ -15,7 +15,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Setup Python
         uses: actions/setup-python@v3
-      - run: python main.py
+      - name: pip install
+        run: pip install -r requirements.txt
+      - name: Do the job
+        run: python main.py
       - name: Commit something
         run: |
          git config --global user.name 'Action Bot'
