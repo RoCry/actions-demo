@@ -11,6 +11,8 @@ def main():
             link = item["link"]
             f.write(f"- [{title}]({link})\n")
 
+            print(f"::set-output name=title::{title}")
+
 
 if __name__ == "__main__":
     main()

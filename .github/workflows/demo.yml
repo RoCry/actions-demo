@@ -19,6 +19,9 @@ jobs:
         run: pip install -r requirements.txt
       - name: Do the job
         run: python main.py
+        id: step_py
+      - name: echo
+        run: echo ${{ steps.step_py.outputs.title }}
       - name: Commit something
         run: |
          git config --global user.name 'Action Bot'
