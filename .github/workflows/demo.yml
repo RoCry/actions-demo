@@ -20,8 +20,10 @@ jobs:
       - name: Do the job
         run: python main.py
         id: step_py
-      - name: echo
+      - name: echo title
         run: echo "${{ steps.step_py.outputs.title }}"
+      - name: echo body
+        run: echo "${{ steps.step_py.outputs.body }}"
       - name: Commit something
         run: |
          git config --global user.name 'Action Bot'

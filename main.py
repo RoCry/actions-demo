@@ -10,8 +10,10 @@ def main():
             title = item["title"]
             link = item["link"]
             f.write(f"- [{title}]({link})\n")
-
             print(f"::set-output name=title::{title}")
+
+    body = "\n".join(map(lambda e: "- " + e["title"], feed["entries"]))
+    print(f"::set-output name=body::{body}")
 
 
 if __name__ == "__main__":
