@@ -34,6 +34,9 @@ jobs:
 #         git add .
 #         git commit -am "Test something"
 #         git push
+      - name: Update Tag
+        run: |
+          git tag -f latest
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
