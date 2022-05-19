@@ -21,7 +21,9 @@ def main():
 
     body = "\n".join(map(lambda e: "- " + e["title"], feed["entries"]))
     print(f"::set-output name=body::{body}")
-    os.environ["RELEASE_FILES"] = "feeds1.md\nfeeds2.md"
+
+    with open(os.getenv('GITHUB_ENV'), "a") as f:
+        f.write("RELEASE_FILES=feeds1.md\nfeeds2.md")
 
 
 if __name__ == "__main__":
