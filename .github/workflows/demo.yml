@@ -25,7 +25,7 @@ jobs:
       - name: echo body
         run: echo "${{ steps.step_py.outputs.body }}"
       - name: echo files
-        run: echo "${{ steps.step_py.outputs.files }}"
+        run: echo "${{ env.RELEASE_FILES }}"
         # release instead of commit
 #      - name: Commit something
 #        run: |
@@ -37,7 +37,5 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: | 
-            feeds1.md
-            feeds2.md
+          files: "${{ env.RELEASE_FILES }}"
 
