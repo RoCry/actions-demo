@@ -24,11 +24,21 @@ jobs:
         run: echo "${{ steps.step_py.outputs.title }}"
       - name: echo body
         run: echo "${{ steps.step_py.outputs.body }}"
-      - name: Commit something
-        run: |
-         git config --global user.name 'Action Bot'
-         git config --global user.email 'crysheen+bot@gmail.com'
-         git add .
-         git commit -am "Test something"
-         git push
+      - name: echo files
+        run: echo "${{ steps.step_py.outputs.files }}"
+        # release instead of commit
+#      - name: Commit something
+#        run: |
+#         git config --global user.name 'Action Bot'
+#         git config --global user.email 'crysheen+bot@gmail.com'
+#         git add .
+#         git commit -am "Test something"
+#         git push
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: | 
+            feeds1.md
+            feeds2.md
 
