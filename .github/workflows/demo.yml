@@ -38,9 +38,7 @@ jobs:
         run: |
           git tag -f latest
           git push -f --tags
-      - uses: actions/checkout@v3
-        with:
-          ref: latest
+          git checkout latest
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
