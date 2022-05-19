@@ -37,6 +37,7 @@ jobs:
       - name: Update Tag
         run: |
           git tag -f latest
+          git push --tags
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
