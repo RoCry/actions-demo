@@ -31,7 +31,7 @@ def put_github_action_env(key: str, value: str):
         raise Exception("GITHUB_ENV is not set")
 
     with open(env_file, "a") as f:
-        f.write(f"{key}<<EOF\n{value}\nEOF")
+        f.write(f"{key}<<EOF\n{value}\nEOF\n")
 
 
 if __name__ == "__main__":
