@@ -25,7 +25,7 @@ def main():
     gh_env = os.getenv('GITHUB_ENV')
     print(f"gh_env: {gh_env}")
     with open(gh_env, "a") as f:
-        f.write("RELEASE_FILES=feeds1.md\nfeeds2.md")
+        f.write("RELEASE_FILES<<EOF\nfeeds1.md\nfeeds2.md\nEOF")
 
 
 if __name__ == "__main__":
