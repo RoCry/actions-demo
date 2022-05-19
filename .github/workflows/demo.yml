@@ -34,13 +34,14 @@ jobs:
 #         git add .
 #         git commit -am "Test something"
 #         git push
-      - name: Update Tag
-        run: |
-          git tag -f latest
-          git push -f --tags
-          git checkout latest
+#      - name: Update Tag
+#        run: |
+#          git tag -f latest
+#          git push -f --tags
+#          git checkout latest
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: latest
           files: "${{ env.RELEASE_FILES }}"
 
