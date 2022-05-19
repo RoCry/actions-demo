@@ -24,6 +24,8 @@ jobs:
         run: echo "${{ steps.step_py.outputs.title }}"
       - name: echo body
         run: echo "${{ steps.step_py.outputs.body }}"
+      - name: echo ebody
+        run: echo "${{ env.E_BODY }}"
       - name: echo files
         run: echo "${{ env.RELEASE_FILES }}"
         # release instead of commit

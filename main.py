@@ -21,11 +21,17 @@ def main():
 
     body = "\n".join(map(lambda e: "- " + e["title"], feed["entries"]))
     print(f"::set-output name=body::{body}")
+    put_github_action_env("E_BODY", body)
+    put_github_action_env("RELEASE_FILES", "feeds1.md\nfeeds2.md")
 
-    gh_env = os.getenv('GITHUB_ENV')
-    print(f"gh_env: {gh_env}")
-    with open(gh_env, "a") as f:
-        f.write("RELEASE_FILES<<EOF\nfeeds1.md\nfeeds2.md\nEOF")
+
+def put_github_action_env(key: str, value: str):
+    env_file = os.getenv('GITHUB_ENV')
+    if env_file is None:
+        raise Exception("GITHUB_ENV is not set")
+
+    with open(env_file, "a") as f:
+        f.write(f"{key}<<EOF\n{value}\nEOF")
 
 
 if __name__ == "__main__":
