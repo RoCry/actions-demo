@@ -1,1 +1,2 @@
-feedparser~=6.0.8
+protobuf~=3.19.0
+lac~=2.1.2

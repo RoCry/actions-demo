@@ -1,38 +1,29 @@
-import datetime
-import os
+from LAC import LAC
 
-import feedparser
+cases = [
+    "Edu Trust认证",
+    "使用自订辞典 Edu Trust认证",
+    "Deep Learning is very cool.",
+    "直布罗陀证券交易所计划同时允许交易加密货币和债券n86",
+    "Danksharding and Modular Narrative - Deep into Data Availability",
+    "Web3 has a marshmallow problem | #5",
+    "喷雾型鼻腔过敏原阻隔剂,羟丁酸正常值是多少【官网miyao.in】 羟丁酸偏高",
+    "12月31日消息，据buybitcoinworldwide数据显示，截至2021年底，各个公司以及国家共计拥有150万枚[比特币](https://www.bitcoin86.com/)。特斯拉、MicroStrategy、Grayscale和其他私营公司共计拥有448 亿美元比特币，将私人实体和基金在内的比特币持有量计算在内，以上整体共持有730亿美元比特币，最大持有者是交易所交易基金。[欧易okex交易平台](https://www.bitcoin86.com/exchanges/15)，[欧易okex交易所官网](https://www.bitcoin86.com/exchanges/15)，[欧易okex官方下载APP](https://www.bitcoin86.com/exchanges/15)",
+    '''
+该研究主持者之一、波士顿大学地球与环境科学系博士陈池（音）表示，“尽管中国和印度国土面积仅占全球陆地的9%，但两国为这一绿化过程贡献超过三分之一。考虑到人口过多的国家一般存在对土地过度利用的问题，这个发现令人吃惊。”
+NASA埃姆斯研究中心的科学家拉玛·内曼尼（Rama Nemani）说，“这一长期数据能让我们深入分析地表绿化背后的影响因素。我们一开始以为，植被增加是由于更多二氧化碳排放，导致气候更加温暖、潮湿，适宜生长。”
+“MODIS的数据让我们能在非常小的尺度上理解这一现象，我们发现人类活动也作出了贡献。”
+NASA文章介绍，在中国为全球绿化进程做出的贡献中，有42%来源于植树造林工程，对于减少土壤侵蚀、空气污染与气候变化发挥了作用。
+据观察者网过往报道，2017年我国全国共完成造林736.2万公顷、森林抚育830.2万公顷。其中，天然林资源保护工程完成造林26万公顷，退耕还林工程完成造林91.2万公顷。京津风沙源治理工程完成造林18.5万公顷。三北及长江流域等重点防护林体系工程完成造林99.1万公顷。完成国家储备林建设任务68万公顷。
+''',
+]
 
+lac = LAC(mode='seg')
 
-def main():
-    feed = feedparser.parse("https://hnrss.org/frontpage")
+text = u"LAC是个优秀的分词工具"
+seg_result = lac.run(text)
+print(seg_result)
 
-    with open("./feeds1.md", "w") as f1, open("./feeds2.md", "w") as f2:
-        time_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        title = f"# {feed['feed']['title']} {time_str}\n\n"
-        print(f"::set-output name=title::{title}")
-        f1.write(title)
-        f2.write(title)
-        for item in feed["entries"]:
-            title = item["title"]
-            link = item["link"]
-            f1.write(f"- [{title}]({link})\n")
-            f2.write(f"- [{title}]({link})\n")
+seg_result = lac.run(cases)
+print(seg_result)
 
-    body = "\n".join(map(lambda e: "- " + e["title"], feed["entries"]))
-    print(f"::set-output name=body::{body}")
-    put_github_action_env("E_BODY", body)
-    put_github_action_env("RELEASE_FILES", "feeds1.md\nfeeds2.md")
-
-
-def put_github_action_env(key: str, value: str):
-    env_file = os.getenv('GITHUB_ENV')
-    if env_file is None:
-        raise Exception("GITHUB_ENV is not set")
-
-    with open(env_file, "a") as f:
-        f.write(f"{key}<<EOF\n{value}\nEOF\n")
-
-
-if __name__ == "__main__":
-    main()
